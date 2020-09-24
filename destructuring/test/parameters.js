@@ -32,18 +32,18 @@ describe('Destructuring function parameters', () => {
       });
       it('for a missing array value', () => {
         const defaultUser = {id: 23, name: 'Joe'};
-        const fn = ([user]) => {
+        const fn = ([user=defaultUser]) => {
           assert.deepEqual(user, defaultUser);
         };
-        fn([{id: 23, name: 'Joe'}]);
+        fn([]);
       });
       it('mix of parameter types', () => {
-        const fn = (id=1, [arr], {obj}) => {
+        const fn = (id=1, [arr=2], {obj=3}) => {
           assert.equal(id, 1);
           assert.equal(arr, 2);
           assert.equal(obj, 3);
         };
-        fn(void 0, [2], {obj:3});
+        fn(void 0, [], {});
       });
     });
   });
