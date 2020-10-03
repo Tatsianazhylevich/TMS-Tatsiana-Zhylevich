@@ -79,7 +79,7 @@ describe('The native string is a built-in iterable object', function() {
       iterator.next();
       iterator.next();
       iterator.next();      
-    
+
       assert.equal(iterator.next().done, true);
     });
   });
@@ -94,13 +94,20 @@ describe('The native string is a built-in iterable object', function() {
 
 describe('A simple iterable without items inside, implementing the right protocol', () => {
 
-  function iteratorFunction() {}
+  function iteratorFunction() {
+    return {
+      next: () => {
+        return { done: true }
+      }
+    }
+  }
 
   describe('the `iteratorFunction` needs to comply to the iterator protocol', function() {
     it('must return an object', function() {
       assert.equal(typeof iteratorFunction(), 'object');
     });
     it('the object must have a function assigned to a key `next`', function() {
+      iteratorFunction().next();
       assert.equal(typeof iteratorFunction().next, 'function');
     });
     it('calling `next()` must return an object with `{done: true}`', function() {
@@ -115,31 +122,36 @@ describe('A simple iterable without items inside, implementing the right protoco
 
   describe('the iterable', function() {
     it('must be an object', function() {
+      iterable = {};
       assert.equal(typeof iterable, 'object');
     });
     it('must have the iterator function assigned to the key `Symbol.iterator`', function() {
+      iterable = {
+        [Symbol.iterator]: iteratorFunction
+      }
       assert.equal(iterable[Symbol.iterator], iteratorFunction);
     });
   });
   describe('using the iterable', function() {
     it('it contains no values', function() {
-      let values;
+      let values = '';
       for (let value of iterable) {
         values += value;
       }
       assert.equal(values, '');
     });
     it('has no `.length` property', function() {
-      const hasLengthProperty = iterable;
+      const hasLengthProperty = typeof (iterable.length) == 'underfined';
+      
       assert.equal(hasLengthProperty, false);
     });
     describe('can be converted to an array', function() {
       it('using `Array.from()`', function() {
-        const arr = iterable;
+        const arr = Array.from(iterable);
         assert.equal(Array.isArray(arr), true);
       });
       it('where `.length` is still 0', function() {
-        const arr = iterable;
+        const arr = Array.from(iterable);
         const length = arr.length;
         assert.equal(length, 0);
       });
