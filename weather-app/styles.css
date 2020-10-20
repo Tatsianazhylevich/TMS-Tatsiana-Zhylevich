@@ -60,3 +60,17 @@ input.input {
 input:focus {
     outline: none;
 }
+
+.cityMap {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0, auto;
+    text-align: center;
+}
+
+img {
+    margin: 20px;
+    border: solid 2px grey;
+}
+    
