@@ -11,7 +11,8 @@ function renderTableRow() {
 
     let tBody = '';
     let cMap = '';
-    map.forEach((value) => {
+
+    map.forEach((value, key) => {
         const[city, country, temp, lat, lon] = value;
         tBody += `
         <tr>
@@ -20,6 +21,7 @@ function renderTableRow() {
             <td>${temp}</td>
             <td>${temp}</td>
         </tr>
+       
         `
         cMap += `<img src='https://maps.locationiq.com/v2/staticmap?key=pk.c6c8e0f26d559c4194d567e972e29b74&center=${lat},${lon}&zoom=12&size=400x400&markers=${lat},${lon}|icon:large-red-cutout'></img>`
     })
@@ -86,6 +88,7 @@ window.addEventListener('load', () => {
 });
 
 // =============================== Button "Clear All"==========================
+
 
 buttonClear.addEventListener('click', () => {
     map.clear();
