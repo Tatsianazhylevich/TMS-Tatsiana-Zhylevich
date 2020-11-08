@@ -1,0 +1,42 @@
+.container {
+  width: 300px;
+  height: 300px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+   justify-content: center;
+   align-items: center;
+}
+  
+.counter {
+  display: flex;
+  flex: 1; 
+  background-color: grey;
+}
+
+.buttons-panel {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  display: flex;
+  width: 100px;
+  height: 100px;  
+}
+
+.decrement {
+  background-color: red;
+}
+
+.reset {
+  background-color: orange;    
+}
+
+.increment {
+  background-color: green;     
+}
