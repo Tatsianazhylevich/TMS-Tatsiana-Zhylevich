@@ -18,9 +18,9 @@ function App() {
   }
 
   return (
-    <div class="container">
-        <div class="counter center">{value}</div>
-        <div class="buttons-panel">
+    <div className="container">
+        <div className="counter center">{value}</div>
+        <div className="buttons-panel">
           <Button className="decrement" onClick={decrement}>-</Button>
           <Button className="reset" onClick={reset}>0</Button>
           <Button className="increment" onClick={increment}>+</Button>
